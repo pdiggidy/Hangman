@@ -2,7 +2,8 @@ import re
 import csv
 import random
 import requests
-import pygame
+
+screen_size = 500
 
 word = ""
 guesses = []
@@ -41,14 +42,14 @@ if not phrase:
             common_words = list(reader)
             word = common_words[random.randint(0, len(common_words) - 1)][0]
 
-else: # Pick a random phrase from the list
+else:  # Pick a random phrase from the list
     with open("Common_phrases.csv", newline="", encoding="utf-8-sig") as common_phrases:
         reader = csv.DictReader(common_phrases, delimiter=';')
         common_phrases = list(reader)
         phrase_info = common_phrases[random.randint(0, len(common_phrases) - 1)]  # Store the phrase info for hints
-        word = phrase_info["Idiom"] # Take just the phrase
+        word = phrase_info["Idiom"]  # Take just the phrase
 
-while num_wrong < max_wrong: # Main loop
+while num_wrong < max_wrong:  # Main loop
     guess = re.findall("[a-zA-Z]", input("Guess a letter: ").strip().lower())  # Check if the guess is just a letter
     if len(guess) != 1:
         print("Please only guess one letter. ")
