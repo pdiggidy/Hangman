@@ -1,11 +1,22 @@
+<Counter@Label>:
+    text: "Counter"
+
+<Word@Label>:
+    text: app.word
+
+<GuessInput@TextInput>:
+    TextInput:
+
 <Boxes>:
     BoxLayout:
         orientation: 'vertical'
         Counter:
-            size_hint: 1, 0.7
-            text: "Counter"
+            id: counter
         Word:
-            size_hint: 1, 0.2
-            text: "word"
+            size_hint: 1, 0.3
+            id: word
         GuessInput:
-            size_hint: 1, 0.1
+            size_hint: 1, 0.2
+            id: guess_txt
+            multiline: False
+            on_text_validate: app.Enter()
