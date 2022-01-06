@@ -15,6 +15,14 @@
         Word:
             size_hint: 1, 0.3
             id: word
+            color: 0, 255,0
+            canvas.before:
+                Color:
+                    rgb: (0.3, 0.3,0.3,1)
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
         GuessInput:
             size_hint: 1, 0.2
             id: guess_txt
