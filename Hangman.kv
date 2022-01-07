@@ -1,6 +1,7 @@
 ScreenManager:
     GameScreen:
     Setting:
+    Hint:
 
 <GameScreen>:
     name: "game"
@@ -35,9 +36,41 @@ ScreenManager:
                     app.root.transition.direction = 'right'
             Button:
                 text: "Hint"
+                on_release:
+                    app.get_hint()
+                    app.root.current = "hint"
+                    app.root.transition.direction = 'left'
 
 
 <Setting>:
     name: "setting"
-    Label:
-        text: "Test"
+    GridLayout:
+        cols: 2
+        size_hint: 0.7, 0.8
+        center: root.center
+        Label:
+            text: "Test"
+        Button:
+            text: "1"
+        Button
+            text: "2"
+
+<Hint>:
+    name: "hint"
+    BoxLayout:
+        orientation: "vertical"
+        Label:
+            id: hint_text
+            text: ""
+        BoxLayout:
+            orientation: "horizontal"
+            Button:
+                text: "Go Back."
+                on_release:
+                    app.root.current = "game"
+                    app.root.transition.direction = 'right'
+            Button:
+                text: "Restart"
+                on_release:
+                    app.root.current = "setting"
+                    app.root.transition.direction = 'right'

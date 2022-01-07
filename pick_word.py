@@ -1,19 +1,11 @@
 import re
 import csv
 import random
-import requests
 
 guesses = []
 num_wrong = 0
 max_wrong = 6  # How many guesses do you get
 correct_letters = []
-
-dictionary_url = "https://api.dictionaryapi.dev/api/v2/entries/en/"
-
-
-def get_definition(word):
-    response = requests.get(dictionary_url + word.lower())
-    return response.json()
 
 
 phrase = False
@@ -22,6 +14,7 @@ hard_mode = False
 
 def Pick(phrase=True, hard_mode=False):
     game_type = "word"  # input("Would you like a word or phrase? ")
+    phrase_info = {"Meaning":""}
 
     if game_type.lower().strip() == "phrase":  # If the person types phrase they get a phrase, anything else and they get
         # a word
@@ -49,7 +42,7 @@ def Pick(phrase=True, hard_mode=False):
             phrase_info = common_phrases[random.randint(0, len(common_phrases) - 1)]  # Store the phrase info for hints
             word = phrase_info["Idiom"]  # Take just the phrase
     word = word.replace('"', "")
-    return word
+    return word, (phrase, phrase_info["Meaning"])
 
 
 def check_guess(num_wrong, correct_letters, guesses, word, guess):
