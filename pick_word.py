@@ -20,7 +20,7 @@ phrase = False
 hard_mode = False
 
 
-def Pick(phrase=False, hard_mode=False):
+def Pick(phrase=True, hard_mode=False):
     game_type = "word"  # input("Would you like a word or phrase? ")
 
     if game_type.lower().strip() == "phrase":  # If the person types phrase they get a phrase, anything else and they get

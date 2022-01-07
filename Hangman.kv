@@ -1,30 +1,43 @@
-<Counter@Label>:
-    text: "Counter"
+ScreenManager:
+    GameScreen:
+    Setting:
 
-<Word@Label>:
-    text: app.word
-
-<GuessInput@TextInput>:
-    TextInput:
-
-<Boxes>:
+<GameScreen>:
+    name: "game"
     BoxLayout:
-        orientation: 'vertical'
-        Counter:
-            id: counter
-        Word:
-            size_hint: 1, 0.3
+        orientation: "vertical"
+        Label:
+            id: mistake_counter
+            text: "0"
+        Label:
+            size_hint: 1, 0.2
             id: word
-            color: 0, 255,0
+            text: "_"
+            font_name: "PlayFair"
             canvas.before:
                 Color:
                     rgb: (0.3, 0.3,0.3,1)
                 Rectangle:
                     pos: self.pos
                     size: self.size
-
-        GuessInput:
-            size_hint: 1, 0.2
+        TextInput
+            size_hint: 1, 0.1
             id: guess_txt
             multiline: False
             on_text_validate: app.Enter()
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint: 1, 0.15
+            Button:
+                text: "Restart"
+                on_release:
+                    app.root.current = "setting"
+                    app.root.transition.direction = 'right'
+            Button:
+                text: "Hint"
+
+
+<Setting>:
+    name: "setting"
+    Label:
+        text: "Test"
