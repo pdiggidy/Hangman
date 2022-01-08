@@ -12,19 +12,11 @@ phrase = False
 hard_mode = False
 
 
-def Pick(phrase=True, hard_mode=False):
+def Pick(word=True, hard_mode=False):
     game_type = "word"  # input("Would you like a word or phrase? ")
     phrase_info = {"Meaning":""}
 
-    if game_type.lower().strip() == "phrase":  # If the person types phrase they get a phrase, anything else and they get
-        # a word
-        phrase = True
-
-    if not phrase:
-        hard_mode_choice = "yes"  # input("Would You like to play hard Mode? Type 'Yes' if so or anything else if not. ")
-        if hard_mode_choice.lower().strip() == "yes":
-            hard_mode = True
-
+    if word:
         if hard_mode:  # If the player has selected hard mode pick a word from the extended list
             with open("words_dictionary_hard.txt") as words:
                 words = list(words)
@@ -42,7 +34,7 @@ def Pick(phrase=True, hard_mode=False):
             phrase_info = common_phrases[random.randint(0, len(common_phrases) - 1)]  # Store the phrase info for hints
             word = phrase_info["Idiom"]  # Take just the phrase
     word = word.replace('"', "")
-    return word, (phrase, phrase_info["Meaning"])
+    return word, (not word, phrase_info["Meaning"])
 
 
 def check_guess(num_wrong, correct_letters, guesses, word, guess):
@@ -70,7 +62,7 @@ def check_guess(num_wrong, correct_letters, guesses, word, guess):
 
 def censor_word(correct_letters, word):
     censored_word_temp = ""
-    for i in word:
+    for i in word.lower():
         if i == " ":
             censored_word_temp += " "
         if i in correct_letters:

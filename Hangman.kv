@@ -1,15 +1,15 @@
 ScreenManager:
-    GameScreen:
     Setting:
+    GameScreen:
     Hint:
 
 <GameScreen>:
     name: "game"
     BoxLayout:
         orientation: "vertical"
-        Label:
+        RelativeLayout:
             id: mistake_counter
-            text: "0"
+            canvas:
         Label:
             size_hint: 1, 0.2
             id: word
@@ -44,16 +44,28 @@ ScreenManager:
 
 <Setting>:
     name: "setting"
-    GridLayout:
-        cols: 2
-        size_hint: 0.7, 0.8
-        center: root.center
-        Label:
-            text: "Test"
+    BoxLayout:
+        orientation: "vertical"
+        GridLayout:
+            cols: 2
+            size_hint: 0.7, 0.8
+            center: root.center
+            Label:
+                text: "Phrase Or Word? \nOn for Word, Off for Phrase:"
+            Switch:
+                id: phrase_word
+                active: True
+            Label:
+                text: "Hard Mode? \nOnly Applies to words."
+            Switch:
+                id: hard_mode
         Button:
-            text: "1"
-        Button
-            text: "2"
+            size_hint: 1, 0.2
+            text: "Start"
+            on_release:
+                app.build(phrase_word.active, hard_mode.active )
+                app.root.current = "game"
+                app.root.transition.direction = "left"
 
 <Hint>:
     name: "hint"
@@ -63,6 +75,7 @@ ScreenManager:
             id: hint_text
             text: ""
         BoxLayout:
+            size_hint: 1, 0.2
             orientation: "horizontal"
             Button:
                 text: "Go Back."
