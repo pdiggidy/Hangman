@@ -2,19 +2,10 @@ import re
 import csv
 import random
 
-guesses = []
-num_wrong = 0
-max_wrong = 6  # How many guesses do you get
-correct_letters = []
-
-
-phrase = False
-hard_mode = False
-
 
 def Pick(word=True, hard_mode=False):
     game_type = "word"  # input("Would you like a word or phrase? ")
-    phrase_info = {"Meaning":""}
+    phrase_info = {"Meaning": ""}
 
     if word:
         if hard_mode:  # If the player has selected hard mode pick a word from the extended list

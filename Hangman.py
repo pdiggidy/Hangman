@@ -38,7 +38,7 @@ kv = Builder.load_file("Hangman.kv")
 
 
 class HangmanApp(App):
-    def build(self, phrase = True, hard_mode = False):
+    def build(self, phrase=True, hard_mode=False):
         self.word, self.phrase = pick_word.Pick(phrase, hard_mode)
         self.layout = kv
         self.guesses = []
@@ -72,16 +72,21 @@ class HangmanApp(App):
                 self.layout.get_screen("hint").ids.hint_text.text = r.json()[0]["meanings"][0]["definitions"][0][
                     "definition"]
 
-
     def draw_rect(self):
-        self.rect_pos = [(self.mistake_counter.width * 0.2, self.mistake_counter.height * 0.1),
-                         ((self.mistake_counter.width * 0.6) - 15,(self.mistake_counter.height * 0.1)+ 15),
+        self.rect_pos = [(self.mistake_counter.width * 0.2, self.mistake_counter.height * 0.1), # 1
 
-                         ((self.mistake_counter.width * 0.6) - 15 - (self.mistake_counter.width * 0.2),
+                         ((self.mistake_counter.width * 0.6) - 15, (self.mistake_counter.height * 0.1) + 15), # 2
+
+                         ((self.mistake_counter.width * 0.6) - 15 - (self.mistake_counter.width * 0.2), # 3
                           (self.mistake_counter.height * 0.1) + (self.mistake_counter.height * 0.7)),
-                         (self.mistake_counter.width * 0.5, self.mistake_counter.height * 0.5),
+
+                         ((self.mistake_counter.width * 0.6) - 15 - (self.mistake_counter.width * 0.2), # 4
+                          (self.mistake_counter.height * 0.1) + (self.mistake_counter.height * 0.7)- self.mistake_counter.height * 0.1 ),
+
                          (self.mistake_counter.width * 0.5, self.mistake_counter.height * 0.6)]
-        self.rect_size = [(self.mistake_counter.width * 0.6, 15), (15, self.mistake_counter.height * 0.7), ((self.mistake_counter.width * 0.2), 15), (5, 5), (5, 5),
+
+        self.rect_size = [(self.mistake_counter.width * 0.6, 15), (15, self.mistake_counter.height * 0.7),
+                          ((self.mistake_counter.width * 0.2), 15), (10, self.mistake_counter.height * 0.1), (5, 5),
                           (5, 5)]
         self.canvas.clear()
         i = 0
